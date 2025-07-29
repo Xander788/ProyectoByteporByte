@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Sistema_Encendido;
+package Motor;
 
 import Interfaces.Encender;
 
@@ -10,7 +10,7 @@ import Interfaces.Encender;
  *
  * @author Braya
  */
-public class Sistema_Encendido implements Encender{
+public class Motor implements Encender{
      private boolean encendido; // Estado del sistema (true = encendido, false = apagado)
 
     // Método que devuelve el estado actual del sistema
@@ -19,7 +19,7 @@ public class Sistema_Encendido implements Encender{
     }
 
     // Constructor: inicializa el sistema como apagado
-    public Sistema_Encendido() {
+    public Motor() {
         this.encendido = false; // inicia apagado
     }
     
