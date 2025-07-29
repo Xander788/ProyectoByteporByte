@@ -11,8 +11,7 @@ package Radio;
  */
 public enum RadioModo{
     AM("AM"),
-    FM("FM"),
-    BLUETOOTH("Bluetooth");
+    FM("FM");
     
     private final String modo;
 

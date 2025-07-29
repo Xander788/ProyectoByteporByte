@@ -14,6 +14,11 @@ public class radio implements Encender{
     private boolean encendido;
     private RadioModo modo;
     private double frecuencia = 87.5;
+    private boolean bluetooth;
+    
+    public boolean blueetoothEncendido(boolean bluetooth){
+        return bluetooth;
+    }
     
     public boolean isEncendido(){
         return encendido;
@@ -43,6 +48,7 @@ public class radio implements Encender{
     public radio(boolean encendido, RadioModo modo) {
         this.encendido = false;
         this.modo = modo;
+        this.bluetooth = false;
     }
     
 }
