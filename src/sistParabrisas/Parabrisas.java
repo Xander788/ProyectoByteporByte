@@ -10,23 +10,30 @@ import Interfaces.Encender;
  * @author Gloriana
  */
 public abstract class Parabrisas implements Encender {
-   private boolean parabrisas;
+   private boolean actividadParabrisas;
+   private String velocidadParabrisas;
 
-    public boolean isParabrisas() {
-        return parabrisas;
+    public boolean isActividadParabrisas() {
+        return actividadParabrisas;
+    }
+
+    public String getVelocidadParabrisas() {
+        return velocidadParabrisas;
     }
     //Necesario para poder usar el enum
-    public void setParabrisas(boolean parabrisas) {
-        this.parabrisas = parabrisas;
-    }
+    public void setVelocidadParabrisas(String velocidadParabrisas) {
+        this.velocidadParabrisas = velocidadParabrisas;
+    }    
     //constructor
-    public Parabrisas(boolean parabrisas) {
-        this.parabrisas = false;
+    public Parabrisas(boolean actividadParabrisas, String velocidadParabrisas) {
+        this.actividadParabrisas = false;
+        this.velocidadParabrisas = "MIN";
     }
-    public void encender(boolean parabrisas){
-    this.parabrisas = true;
+    
+    public void encender(boolean actividadParabrisas){
+    this.actividadParabrisas = true;
     } 
-    public void apagar(boolean parabrisas){
-    this.parabrisas = false;
+    public void apagar(boolean actividadParabrisas){
+    this.actividadParabrisas = false;
     } 
 }
