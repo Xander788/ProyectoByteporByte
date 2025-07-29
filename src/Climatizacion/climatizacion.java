@@ -14,7 +14,7 @@ import Climatizacion.AC_Calefaccion;
 public class climatizacion implements Encender{
     private Velocidad velocidad;
     private AC_Calefaccion estado;
-    private int temperatura = 0;
+    private int temperatura;
     private boolean encendido;
     
     public boolean isEncendido(){
@@ -39,10 +39,11 @@ public class climatizacion implements Encender{
         this.encendido=false;   
     }
 
-    public climatizacion(Velocidad velocidad, AC_Calefaccion estado, boolean encendido) {
+    public climatizacion(Velocidad velocidad, AC_Calefaccion estado) {
         this.velocidad = velocidad;
         this.estado = estado;
-        this.encendido = encendido;
+        this.encendido = false;
+        this.temperatura = 0;
     }
     
     
