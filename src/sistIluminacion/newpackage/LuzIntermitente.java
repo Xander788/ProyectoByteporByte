@@ -24,13 +24,13 @@ public abstract class LuzIntermitente extends Luces {
         this.luzIntermitente = false;
 }
     @Override
-    public void encender(boolean luzIntermitente){
+    public void encender(){
     this.luzIntermitente = true;
 }   
-    public void apagar(boolean luzIntermitente){
+    public void apagar(){
     this.luzIntermitente = true;
 } 
-    public void funcionIntermitente(boolean luzIntermitente){
+    public void funcionIntermitente(){
         while(true){
             if (!luzIntermitente){ 
                 try{
