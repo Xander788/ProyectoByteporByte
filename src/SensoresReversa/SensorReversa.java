@@ -17,14 +17,8 @@ public class SensorReversa  implements Encender{
         return alarma;
     }
 
-    public void encender(boolean alarma) {
-        if(!this.alarma){
-            this.alarma=true;
-        }
-    }
-
-    public void apagar(boolean alarma) {
-        this.alarma=false;
+    public SensorReversa(boolean alarma) {
+        this.alarma = alarma;
     }
 
     @Override
@@ -38,8 +32,5 @@ public class SensorReversa  implements Encender{
     public void apagar() {
         this.alarma=false;
     }
-
-   
-    
     
 }
