@@ -9,9 +9,10 @@ package sistParabrisas;
  * @author Gloriana
  */
 public enum EnumParabrisas {
-    RAPIDO("VELOCIDAD MAXIMA"),
+    APAGADO("APAGADO"),
+    BAJO("VELOCIDAD MINIMA"),
     MEDIO("VELOCIDAD MEDIA"),
-    BAJO("VELOCIDAD MINIMA");
+    RAPIDO("VELOCIDAD MAXIMA");
     
     private final String velocidad;
 

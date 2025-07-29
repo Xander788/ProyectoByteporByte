@@ -13,8 +13,9 @@ public abstract class LuzIntermitente extends Luces {
     private volatile boolean luzIntermitente;
     
     //porque?
-    public LuzIntermitente(boolean luz) {
-        super(luz);
+
+    public LuzIntermitente(boolean luzIntermitente) {
+        this.luzIntermitente = luzIntermitente;
     }
 
     public boolean isLuzIntermitente() {
@@ -24,13 +25,13 @@ public abstract class LuzIntermitente extends Luces {
         this.luzIntermitente = false;
 }
     @Override
-    public void encender(boolean luzIntermitente){
+    public void encender(){
     this.luzIntermitente = true;
 }   
-    public void apagar(boolean luzIntermitente){
+    public void apagar(){
     this.luzIntermitente = true;
 } 
-    public void funcionIntermitente(boolean luzIntermitente){
+    public void funcionIntermitente(){
         while(true){
             if (!luzIntermitente){ 
                 try{
