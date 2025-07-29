@@ -17,7 +17,7 @@ public abstract class Luces implements Encender{
         return luz;
     }
     //constructor
-    public Luces(boolean luz) {
+    public Luces() {
         this.luz = false;
     }
     //importado de interfases

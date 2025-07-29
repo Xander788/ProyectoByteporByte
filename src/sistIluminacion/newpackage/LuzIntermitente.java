@@ -13,8 +13,9 @@ public abstract class LuzIntermitente extends Luces {
     private volatile boolean luzIntermitente;
     
     //porque?
-    public LuzIntermitente(boolean luz) {
-        super(luz);
+
+    public LuzIntermitente(boolean luzIntermitente) {
+        this.luzIntermitente = luzIntermitente;
     }
 
     public boolean isLuzIntermitente() {
