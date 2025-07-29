@@ -21,10 +21,10 @@ public abstract class Luces implements Encender{
         this.luz = false;
     }
     //importado de interfases
-    public void encender(boolean luz){
+    public void encender(){
        this.luz = true; 
     }
-    public void apagar(boolean luz){
-       this.luz = true; 
+    public void apagar(){
+       this.luz = false; 
     }
 }
