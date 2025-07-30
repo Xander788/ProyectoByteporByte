@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import Combustible.Combustible;
 import Motor.Motor;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -15,16 +17,45 @@ import javax.swing.Timer;
 public class MotorIFrm extends javax.swing.JInternalFrame {
 
     private Motor motor;
-    private Timer timer;
+    private Combustible combustible;
+    private Timer timercombustible;
     /**
      * Creates new form MotorIFrm
      */
     public MotorIFrm() {
         initComponents();
         motor = new Motor();
+        combustible = new Combustible();
         lblKilometraje.setText("Kilometraje: " + String.format("%.2f", motor.getKilometraje()) + " km");
         lblVelocidad.setText("Velocidad: " + motor.getVelocidad() + " km/h");
         lblRPM.setText("RPM: " + motor.getRpm());
+        actualizarLblcombustible();
+    }
+    
+    private void actualizarLblcombustible() {
+    double nivel = combustible.getNivel();
+    lblcombustible.setText("Combustible:" + String.format("%.0f", nivel)+"%");
+  
+}
+    private void iniciarConsumo() {
+        timercombustible = new Timer(1000, e -> {
+            combustible.consumir();
+
+            actualizarLblcombustible();
+
+            if (combustible.getNivel() <= 0) {
+                detenerConsumo();
+                motor.apagar();
+                lblMotor.setForeground(Color.red);
+                lblKilometraje.setText("Kilometraje: " + String.format("%.2f", motor.getKilometraje()) + " km");
+                JOptionPane.showMessageDialog(this, "Sin combustible");
+            }
+        });
+        timercombustible.start();
+    }
+    
+    private void detenerConsumo() {
+        timercombustible.stop();
     }
 
     /**
@@ -41,8 +72,11 @@ public class MotorIFrm extends javax.swing.JInternalFrame {
         lblVelocidad = new javax.swing.JLabel();
         lblRPM = new javax.swing.JLabel();
         lblKilometraje = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
         comboMarchas = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnGasolina = new javax.swing.JButton();
+        lblcombustible = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -68,19 +102,34 @@ public class MotorIFrm extends javax.swing.JInternalFrame {
         lblKilometraje.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblKilometraje.setText("Kilometraje");
 
-        jButton1.setText("Apagar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnApagarActionPerformed(evt);
             }
         });
 
-        comboMarchas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "R", "N", "1", "2", "3" }));
+        comboMarchas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N", "R", "1", "2", "3" }));
         comboMarchas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboMarchasActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Gasolina");
+
+        btnGasolina.setText("Rellenar ");
+        btnGasolina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGasolinaActionPerformed(evt);
+            }
+        });
+
+        lblcombustible.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcombustible.setText("Combustible:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,37 +138,52 @@ public class MotorIFrm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboMarchas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEncender)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
                     .addComponent(lblVelocidad)
                     .addComponent(lblRPM)
-                    .addComponent(lblKilometraje))
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addComponent(lblKilometraje)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEncender)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnApagar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboMarchas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnGasolina, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblcombustible, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboMarchas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboMarchas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblcombustible, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEncender)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnApagar)
+                    .addComponent(btnGasolina))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblVelocidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRPM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblKilometraje)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,17 +192,17 @@ public class MotorIFrm extends javax.swing.JInternalFrame {
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
         motor.encender();
         lblMotor.setForeground(Color.green);
+        iniciarConsumo();
     }//GEN-LAST:event_btnEncenderActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (motor.isEncendido()){
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        if (motor.isEncendido()) {
             motor.apagar();
             lblMotor.setForeground(Color.red);
             lblKilometraje.setText("Kilometraje: " + String.format("%.2f", motor.getKilometraje()) + " km");
+            detenerConsumo();
         }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnApagarActionPerformed
 
     private void comboMarchasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMarchasActionPerformed
         
@@ -166,14 +230,22 @@ public class MotorIFrm extends javax.swing.JInternalFrame {
         lblRPM.setText("RPM: " + motor.getRpm());
     }//GEN-LAST:event_comboMarchasActionPerformed
 
+    private void btnGasolinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGasolinaActionPerformed
+        combustible.rellenarCombustible();
+        actualizarLblcombustible();
+    }//GEN-LAST:event_btnGasolinaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnEncender;
+    private javax.swing.JButton btnGasolina;
     private javax.swing.JComboBox<String> comboMarchas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblKilometraje;
     private javax.swing.JLabel lblMotor;
     private javax.swing.JLabel lblRPM;
     private javax.swing.JLabel lblVelocidad;
+    private javax.swing.JLabel lblcombustible;
     // End of variables declaration//GEN-END:variables
 }
