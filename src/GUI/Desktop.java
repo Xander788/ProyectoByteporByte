@@ -31,18 +31,27 @@ public class Desktop extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        Motor = new javax.swing.JButton();
+        btnMotor = new javax.swing.JButton();
+        btnCarro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Motor.setText("Motor");
-        Motor.addActionListener(new java.awt.event.ActionListener() {
+        btnMotor.setText("Motor");
+        btnMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MotorActionPerformed(evt);
+                btnMotorActionPerformed(evt);
             }
         });
 
-        jDesktopPane1.setLayer(Motor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        btnCarro.setText("Carro");
+        btnCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarroActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane1.setLayer(btnMotor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnCarro, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -50,14 +59,18 @@ public class Desktop extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(Motor, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(716, Short.MAX_VALUE))
+                .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(btnCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(Motor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(444, Short.MAX_VALUE))
         );
 
@@ -75,12 +88,18 @@ public class Desktop extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MotorActionPerformed
+    private void btnMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorActionPerformed
         MotorIFrm motor = new MotorIFrm();
         jDesktopPane1.add(motor);
         motor.setVisible(true);
 
-    }//GEN-LAST:event_MotorActionPerformed
+    }//GEN-LAST:event_btnMotorActionPerformed
+
+    private void btnCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarroActionPerformed
+        CarroIFrm carro = new CarroIFrm();
+        jDesktopPane1.add(carro);
+        carro.setVisible(true);
+    }//GEN-LAST:event_btnCarroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,7 +127,8 @@ public class Desktop extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Motor;
+    private javax.swing.JButton btnCarro;
+    private javax.swing.JButton btnMotor;
     private javax.swing.JDesktopPane jDesktopPane1;
     // End of variables declaration//GEN-END:variables
 }
