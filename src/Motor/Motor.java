@@ -11,27 +11,67 @@ import Interfaces.Encender;
  * @author Braya
  */
 public class Motor implements Encender{
-     private boolean encendido; // Estado del sistema (true = encendido, false = apagado)
+    private boolean encendido;
+    private double velocidad;
+    private int rpm;
+    private double kilometraje;
+    private long tiempoEncendido; 
+    private long tiempoInicio;
 
-    // Método que devuelve el estado actual del sistema
     public boolean isEncendido() {
         return encendido;
     }
 
-    // Constructor: inicializa el sistema como apagado
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public int getRpm() {
+        return rpm;
+    }
+
+    public double getKilometraje() {
+        return kilometraje;
+    }
+    
     public Motor() {
-        this.encendido = false; // inicia apagado
+        this.encendido = false;
+        this.velocidad = 0;
+        this.rpm = 0;
+        this.kilometraje = 0;
+        this.tiempoEncendido = 0;
+    }
+    @Override
+    public void encender() {
+        if (!encendido) {
+            encendido = true;
+            tiempoInicio = System.currentTimeMillis();
+        }
     }
     
     @Override
-    public void encender() {
-        if(!this.encendido){
-            this.encendido=true;
+    public void apagar() {
+        if (encendido) {
+            actualizarKilometraje();
+            encendido = false;
         }
     }
-        
-    @Override
-    public void apagar() {
-       this.encendido=false;
-    } 
+
+    private void actualizarKilometraje() {
+        long tiempoFinal = System.currentTimeMillis();
+        long duracion = tiempoFinal - tiempoInicio;
+        tiempoEncendido += duracion;
+
+        double horas = duracion / 3600000.0;
+        kilometraje += velocidad * horas;
+    }
+
+    public void setVelocidad(double nuevaVelocidad) {
+        this.velocidad = nuevaVelocidad;
+        this.rpm = calcularRPM(nuevaVelocidad);
+    }
+
+    private int calcularRPM(double velocidad) {
+        return (int)(velocidad * 100); 
+    }
 }
