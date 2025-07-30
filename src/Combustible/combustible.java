@@ -8,18 +8,26 @@ package Combustible;
  *
  * @author oscar
  */
-public class combustible {
+public class Combustible {
     private double nivel;
 
     public double getNivel() {
         return nivel;
     }
-    
-    public double consumo(double nivel){
-        return nivel; 
-    }  
 
-    public combustible(double nivel) {
+    public Combustible() {
         this.nivel = 100.0;
+    }
+    
+    public void rellenarCombustible(){
+        this.nivel=100;
+    }
+    
+    public void consumir() {
+        if (nivel >= 0.35) {
+            nivel -= 0.35;
+        } else {
+            nivel = 0;
+        }
     }
 }
