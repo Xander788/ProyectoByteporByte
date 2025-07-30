@@ -27,18 +27,10 @@ public class CarroIFrm extends javax.swing.JInternalFrame {
     }
     
     private void mostrarImagen() {
-    java.net.URL url = getClass().getResource("/Images/Carro.png");
-    if (url != null) {
+        java.net.URL url = getClass().getResource("/Images/carro.png");
         ImageIcon iconoOriginal = new ImageIcon(url);
-        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(
-            lblCarro.getWidth(),
-            lblCarro.getHeight(),
-            Image.SCALE_SMOOTH
-        );
+        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance( lblCarro.getWidth(),lblCarro.getHeight(),Image.SCALE_SMOOTH);
         lblCarro.setIcon(new ImageIcon(imagenEscalada));
-    } else {
-        System.out.println("No se encontró la imagen.");
-    }
 }
 
     /**
