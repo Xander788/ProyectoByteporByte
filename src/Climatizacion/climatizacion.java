@@ -5,12 +5,7 @@
 package Climatizacion;
 
 import Interfaces.Encender;
-import Climatizacion.Velocidad;
-import Climatizacion.AC_Calefaccion;
-/**
- *
- * @author oscar
- */
+
 public class climatizacion implements Encender{
     private Velocidad velocidad;
     private AC_Calefaccion estado;
@@ -39,9 +34,21 @@ public class climatizacion implements Encender{
         this.encendido=false;   
     }
 
-    public climatizacion(Velocidad velocidad, AC_Calefaccion estado) {
-        this.velocidad = velocidad;
-        this.estado = estado;
+    public Velocidad getVelocidad() {
+        return velocidad;
+    }
+
+    public AC_Calefaccion getEstado() {
+        return estado;
+    }
+
+    public int getTemperatura() {
+        return temperatura;
+    }
+
+    public climatizacion() {
+        this.velocidad = velocidad.lento;
+        this.estado = estado.APAGADO;
         this.encendido = false;
         this.temperatura = 0;
     }

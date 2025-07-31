@@ -4,15 +4,14 @@
  */
 package Climatizacion;
 
-/**
- *
- * @author oscar
- */
+
 public enum AC_Calefaccion {
     AC("Aire Acondicionado"),
-    CALEFACCION("Calefaccion");
+    CALEFACCION("Calefaccion"),
+    APAGADO("Apagado");
     
     private final String estado;
+    
 
     private AC_Calefaccion(String estado) {
         this.estado = estado;
@@ -21,6 +20,10 @@ public enum AC_Calefaccion {
     public String getEstado() {
         return estado;
     }
-        
+    
+    public String toString(){
+        return estado;
+    }
+       
     
 }
