@@ -32,7 +32,7 @@ public class CinturonesYPuertasIFrm extends javax.swing.JInternalFrame {
     ImageIcon carro = new ImageIcon(getClass().getResource("/Images/Carro.png"));
     ImageIcon puertaP = new ImageIcon(getClass().getResource("/Images/PuertaPiloto.png"));
     ImageIcon puertaC = new ImageIcon(getClass().getResource("/Images/PuertaCopiloto.png"));
-    ImageIcon Candado = new ImageIcon(getClass().getResource("/Images/candado.png"));
+    ImageIcon Candado = new ImageIcon(getClass().getResource("/Images/candado.avif"));
     /**
      * Creates new form CinturonesIFrm
      */
