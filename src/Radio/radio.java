@@ -13,15 +13,24 @@ import Interfaces.Encender;
 public class radio implements Encender{
     private boolean encendido;
     private RadioModo modo;
-    private double frecuencia = 87.5;
+    private double frecuencia;
     private boolean bluetooth;
+    private double paso;
     
-    public boolean blueetoothEncendido(boolean bluetooth){
-        return bluetooth;
+    public boolean blueetoothEncendido(){
+        return false;
     }
     
     public boolean isEncendido(){
         return encendido;
+    }
+
+    public double getPaso() {
+        return paso;
+    }
+
+    public RadioModo getModo() {
+        return modo;
     }
 
     public double getFrecuencia() {
@@ -31,8 +40,15 @@ public class radio implements Encender{
     public void setModo() {
         this.modo = modo;
     }
-    public void cambiarFrecuencia(RadioModo modo, double frecuencia){
-     
+    public double cambiarFrecuencia(RadioModo modo){
+        if(modo == modo.AM){
+            this.frecuencia = 530.0;
+        }else{
+            if(modo == modo.FM){
+                this.frecuencia = 87.5;
+            }
+        }
+        return frecuencia;
     }
 
     @Override
@@ -45,10 +61,11 @@ public class radio implements Encender{
         this.encendido=false;
     }  
 
-    public radio(boolean encendido, RadioModo modo) {
+    public radio() {
         this.encendido = false;
-        this.modo = modo;
+        this.modo = modo.AM;
         this.bluetooth = false;
-    }
-    
+        this.frecuencia = 0.0;
+        this.paso=0.0;
+    } 
 }
